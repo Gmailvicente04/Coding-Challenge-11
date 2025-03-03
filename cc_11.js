@@ -67,3 +67,25 @@ const library = new Library();
 library.addBook(book1);
 library.borrowers.push(borrower1);
 library.listBooks();
+
+// Task 4: Implementing Book Borrowing
+class LibraryExtended extends Library {
+    lendBook(borrowerId, isbn) {
+        const book = this.books.find(b => b.isbn === isbn && b.copies > 0);
+        const borrower = this.borrowers.find(b => b.borrowerId === borrowerId);
+        
+        if (book && borrower) {
+            book.updateCopies(-1);
+            borrower.borrowBook(book.title);
+        }
+    }
+}
+
+
+
+const libraryExtended = new LibraryExtended();
+libraryExtended.addBook(book1);
+libraryExtended.borrowers.push(borrower1);
+libraryExtended.lendBook(201, '9780062315007');
+console.log(book1.getDetails());
+console.log(borrower1.borrowedBooks);
