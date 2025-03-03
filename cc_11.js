@@ -17,3 +17,30 @@ class Book {
 }
 const book1 = new Book('The Alchemist', 'Paulo Coelho', '9780062315007', 5);
 console.log(book1.getDetails());
+book1.updateCopies(-1);
+console.log(book1.getDetails());
+
+
+// Task 2: Creating a Borrower Class
+class Borrower {
+    constructor(name, borrowerId) {
+        this.name = name;
+        this.borrowerId = borrowerId;
+        this.borrowedBooks = [];
+    }
+
+    borrowBook(book) {
+        this.borrowedBooks.push(book);
+    }
+
+    returnBook(book) {
+        this.borrowedBooks = this.borrowedBooks.filter(b => b !== book);
+    }
+}
+
+const borrower1 = new Borrower("Vicente Oswald", 201);
+borrower1.borrowBook("The Alchemist");
+console.log(borrower1.borrowedBooks);
+
+borrower1.returnBook("The Alchemist");
+console.log(borrower1.borrowedBooks);
