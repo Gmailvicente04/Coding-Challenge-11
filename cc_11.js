@@ -89,3 +89,21 @@ libraryExtended.borrowers.push(borrower1);
 libraryExtended.lendBook(201, '9780062315007');
 console.log(book1.getDetails());
 console.log(borrower1.borrowedBooks);
+
+
+// Task 5: Implementing Book Returns
+LibraryExtended.prototype.returnBook = function (borrowerId, isbn) {
+    const book = this.books.find(b => b.isbn === isbn);
+    const borrower = this.borrowers.find(b => b.borrowerId === borrowerId);
+    
+    if (book && borrower && borrower.borrowedBooks.includes(book.title)) {
+        book.updateCopies(1);
+        borrower.returnBook(book.title);
+    }
+};
+
+// return 1 book, increase copies from 3 to 4
+libraryExtended.returnBook(201, '9780062315007');
+
+console.log(book1.getDetails());
+console.log(borrower1.borrowedBooks);
